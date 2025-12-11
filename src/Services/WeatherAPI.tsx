@@ -12,6 +12,7 @@ export async function fetchWeather(city: string) {
         if (!response.ok) throw new Error("Failed to fetch weather");
         return await response.json();
     } catch (e) {
-        console.error(e.message);
+        // console.error(e.message);
+        console.error(e);
     }
 }
