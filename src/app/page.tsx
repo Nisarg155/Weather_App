@@ -1,7 +1,7 @@
 'use client'
 import {useStore} from "@/lib/useStore";
 import {useEffect, useState} from "react";
-import {fetchWeather} from "@/Services/WeatherAPI";
+import {fetchCurrent} from "@/Services/WeatherAPI";
 import WeatherLayout from "@/components/WeatherLayout";
 import {WeatherCard} from "@/components/WeatherCard";
 import {Current, ForecastDay} from "@/types/component.types";
@@ -16,7 +16,7 @@ export default function Home() {
 
     useEffect(() => {
         const load = async () => {
-            const data = await fetchWeather(location)
+            const data = await fetchCurrent(location)
             console.log(data);
         }
         load();
@@ -40,8 +40,8 @@ export default function Home() {
         <>
             <WeatherLayout>
                 <WeatherCard location={globalLocation} current={mockCurrent}/>
-                <SevenDayForecast days={mockForecast}/>
                 <AirConditions current={mockCurrent}/>
+                <SevenDayForecast days={mockForecast}/>
             </WeatherLayout>
         </>
     );

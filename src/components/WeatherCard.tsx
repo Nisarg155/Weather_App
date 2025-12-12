@@ -8,6 +8,12 @@ const mockHourly: Hourly[] = [
     { time: "3 PM", temp_c: 34, icon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
     { time: "6 PM", temp_c: 32, icon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
     { time: "9 PM", temp_c: 30, icon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
+    { time: "6 AM", temp_c: 25, icon: "//cdn.weatherapi.com/weather/64x64/day/116.png" },
+    { time: "9 AM", temp_c: 28, icon: "//cdn.weatherapi.com/weather/64x64/day/116.png" },
+    { time: "12 PM", temp_c: 33, icon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
+    { time: "3 PM", temp_c: 34, icon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
+    { time: "6 PM", temp_c: 32, icon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
+    { time: "9 PM", temp_c: 30, icon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
 ];
 
 export function WeatherCard({ location, current }: { location: string; current: Current }) {
