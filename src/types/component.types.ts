@@ -11,11 +11,7 @@ export type Current = {
 };
 
 
-export type Hourly = {
-    time: string; // ISO or hh:mm
-    temp_c: number;
-    icon: string;
-};
+
 
 
 export type ForecastDay = {
