@@ -18,7 +18,7 @@ export function AstroCard({astro}:{astro:AstroType}) {
     const emoji = moonPhaseEmojiMap[astro.moonphase] || "🌙";
 
     return (
-        <div className="grid grid-cols-2 mt-4 mb-4 gap-1 sm:gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-2 mt-4 mb-4 gap-2 sm:gap-2">
 
             <div className="rounded-xl bg-slate-800/60 p-3 grid grid-cols-2 text-center">
 
@@ -50,7 +50,7 @@ export function AstroCard({astro}:{astro:AstroType}) {
             </div>
 
             {/* RIGHT — 3 columns: Moonrise / Phase / Moonset */}
-            <div className="rounded-xl bg-slate-800/60 p-3 grid grid-cols-3 text-center">
+            <div className="rounded-xl col-span-2 sm:col-span-1 bg-slate-800/60 p-3 grid grid-cols-3 text-center">
 
                 {/* Moonrise */}
                 <div className="flex flex-col items-center">
