@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {fetchCurrent} from "@/Services/WeatherAPI";
 import WeatherLayout from "@/components/WeatherLayout";
 import {WeatherCard} from "@/components/Cards/WeatherCard";
-import {Current, ForecastDay} from "@/types/component.types";
+import { ForecastDay} from "@/types/component.types";
 import {SevenDayForecast} from "@/components/Cards/WeatherForcast";
 import {AirConditions} from "@/components/Cards/AirCondition";
 import {CurrentDataType} from "@/types/weather.types";

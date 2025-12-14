@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {AstroType} from "@/types/weather.types";
-import { Moon ,Hemisphere } from "lunarphase-js";
+
 
 export function AstroCard({astro}:{astro:AstroType}) {
 
