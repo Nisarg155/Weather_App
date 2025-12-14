@@ -17,22 +17,19 @@ import {AstroCardLoader} from "@/components/Loaders/AstroLoader";
 import {RdxSwitch} from "@/components/ui/switch";
 import {SevenDayForecastLoader} from "@/components/Loaders/ForeCastLoaser";
 import dynamic from "next/dynamic";
+import {MapLoader} from "@/components/Loaders/MapLoader";
+
 const MapSelector = dynamic(() => import("@/components/Map"), {
     ssr: false,
 });
 
 
-
-
 export default function Home() {
     const globalLocation = useStore((s) => s.currentLocation);
-    const setCurrentLocation = useStore((s) => s.setCurrentLocation);
-    // const [location, setLocation] = useState(globalLocation);
     const scale = useStore((s) => s.scale);
     const setScale = useStore((s) => s.setScale);
     const unit = useStore((s) => s.unit);
     const setUnit = useStore((s) => s.setUnit);
-    const coords = useStore((s) => s.coords);
     const setCoords = useStore((s) => s.setCoords);
 
     // Card States
@@ -56,8 +53,8 @@ export default function Home() {
                 const data = await fetchCurrent(globalLocation)
 
                 setCoords({
-                    lat:data!.location.lat,
-                    long:data!.location.lon
+                    lat: data!.location.lat,
+                    long: data!.location.lon
                 })
 
                 setWeatherCardData({
@@ -119,6 +116,7 @@ export default function Home() {
                             <AirConditionsLoader/>
                             <AstroCardLoader/>
                             <SevenDayForecastLoader/>
+                            <MapLoader/>
                         </>)
                         : (
                             <>
@@ -129,10 +127,14 @@ export default function Home() {
                                 <AirConditions aircondition={airConditionsData!.atmospheric} unit={unit}/>
                                 <AstroCard astro={astroData!.astro}/>
                                 <SevenDayForecast forecast={forecastData!.forecast} scale={scale}/>
+                                <MapSelector/>
                             </>
                         )
                 }
-                <MapSelector/>
+
+
+
+
             </WeatherLayout>
         </>
     );

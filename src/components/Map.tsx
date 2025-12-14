@@ -4,7 +4,6 @@ import {MapContainer, TileLayer, Marker, useMapEvents} from "react-leaflet";
 import {useEffect, useRef, useState} from "react";
 import L from "leaflet";
 import {useStore} from "@/lib/useStore";
-import {CityType} from "@/types/weather.types";
 import {fetchCityBasedOnLatLong} from "@/Services/WeatherAPI";
 
 const markerIcon = new L.Icon({
@@ -98,7 +97,6 @@ export default function MapSelector() {
                 ref={mapRef}
             >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-
                 <MapClickHandler/>
                 <DraggableMarker/>
             </MapContainer>
