@@ -76,3 +76,15 @@ export interface ApiForecast {
 export type ApiForecastArray = Array<ApiForecast>
 
 export type ApiHourArray = Array<ApiHour>;
+
+export interface ApiSearchCity {
+    id:number;
+    name: string;
+    region: string;
+    country: string;
+    lat: number;
+    lon: number;
+    url:string;
+}
+
+export type ApiSearchCityArray = Array<ApiSearchCity>;

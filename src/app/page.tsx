@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import {fetchCurrent} from "@/Services/WeatherAPI";
 import WeatherLayout from "@/components/WeatherLayout";
 import {WeatherCard} from "@/components/Cards/WeatherCard";
-import {ForecastDay} from "@/types/component.types";
 import {SevenDayForecast} from "@/components/Cards/ForecastCard";
 import {AirConditions} from "@/components/Cards/AirCondition";
 import {WeatherDataType} from "@/types/weather.types";
@@ -22,7 +21,7 @@ import {SevenDayForecastLoader} from "@/components/Loaders/ForeCastLoaser";
 export default function Home() {
     const globalLocation = useStore((s) => s.currentLocation);
     const setCurrentLocation = useStore((s) => s.setCurrentLocation);
-    const [location, setLocation] = useState(globalLocation);
+    // const [location, setLocation] = useState(globalLocation);
     const scale = useStore((s) => s.scale);
     const setScale = useStore((s) => s.setScale);
     const unit = useStore((s) => s.unit);
@@ -47,7 +46,7 @@ export default function Home() {
 
         try {
             const load = async () => {
-                const data = await fetchCurrent(location)
+                const data = await fetchCurrent(globalLocation)
 
                 setWeatherCardData({
                     location: data!.location,
@@ -77,7 +76,7 @@ export default function Home() {
             toast.error(e instanceof Error ? e.message : "Failed to fetch current data");
         }
 
-    }, [location]);
+    }, [globalLocation]);
 
 
     return (

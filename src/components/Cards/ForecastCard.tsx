@@ -16,9 +16,7 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
                 <div className="overflow-x-auto">
                     <div className="inline-flex md:flex md:divide-x-0 w-full">
                         {forecast.map((day, idx) => {
-                            const weekday = new Date(day.date).toLocaleDateString(undefined, {
-                                weekday: "short",
-                            });
+
                             const icon = day.day.condition.icon.startsWith("//")
                                 ? `https:${day.day.condition.icon}`
                                 : day.day.condition.icon;
@@ -33,7 +31,7 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
                   `}
                                 >
                                     {/* Day */}
-                                    <div className="text-xs text-slate-400 mb-2">{weekday}</div>
+                                    <div className="text-xs text-slate-400 mb-2">{day.date}</div>
 
                                     {/* Icon */}
                                     <Image
@@ -53,7 +51,7 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
                                     <div className="text-lg font-semibold mt-2">
                                         {scale === 'C' ? Math.round(day.day.maxtemp_c) : Math.round(day.day.maxtemp_f)}°
                                         <span className="text-slate-400 text-sm">
-                      /{scale ? Math.round(day.day.mintemp_c) : Math.round(day.day.mintemp_f)}°
+                      /{scale === 'C' ? Math.round(day.day.mintemp_c) : Math.round(day.day.mintemp_f)}°
                     </span>
                                     </div>
                                 </div>

@@ -4,9 +4,17 @@ import {
     CurrentAtmosphereType,
     HourlyArray,
     HourlyType,
-    LocationType, ForecastArray, ForecastType
+    LocationType, ForecastArray, ForecastType, CityArray, CityType
 } from "@/types/weather.types";
-import {ApiAstro, ApiCurrent, ApiForecastArray, ApiHour, ApiHourArray, ApiLocation} from "@/types/api.types";
+import {
+    ApiAstro,
+    ApiCurrent,
+    ApiForecastArray,
+    ApiHour,
+    ApiHourArray,
+    ApiLocation,
+    ApiSearchCity, ApiSearchCityArray
+} from "@/types/api.types";
 
 
 export function mapLocation(location: ApiLocation): LocationType {
@@ -20,7 +28,10 @@ export function mapLocation(location: ApiLocation): LocationType {
     }
 }
 
-export function mapCurrentAndAtmospheric(current: ApiCurrent): { Current: CurrentType, Atmospheric: CurrentAtmosphereType } {
+export function mapCurrentAndAtmospheric(current: ApiCurrent): {
+    Current: CurrentType,
+    Atmospheric: CurrentAtmosphereType
+} {
     return {
         Current: {
             condition: current.condition,
@@ -104,5 +115,12 @@ export function mapForecast(forecast: ApiForecastArray): ForecastArray {
         day: item.day,
         hourly: mapHourly(item.hour),
     }));
+}
+
+export function cityMapper(cities: ApiSearchCityArray): CityArray {
+    return cities.map((city): CityType => ({
+        name: city.name,
+        id: city.id,
+    }))
 }
 

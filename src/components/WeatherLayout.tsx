@@ -2,6 +2,7 @@
 
 import * as Box from "@radix-ui/react-slot";
 import {ReactNode} from "react";
+import {CitySearch} from "@/components/CitySearch";
 
 // import { cn } from "@/lib/utils"; // optional helper if using shadcn
 
@@ -25,19 +26,17 @@ export default function WeatherLayout({children}: LayoutProps) {
     );
 }
 
-/* TopBar component */
+
 
 function TopBar() {
     return (
         <div className="flex items-center gap-4">
-            {/* App title */}
+
             <h1 className="text-xl font-semibold tracking-tight">Weather App</h1>
 
-            {/* Search bar (shadcn/ui input optional) */}
-            <input
-                placeholder="Search for cities"
-                className="ml-auto w-full max-w-md rounded-lg bg-slate-800 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
-            />
+            <div className="ml-auto w-full max-w-md">
+                <CitySearch />
+            </div>
         </div>
     );
 }

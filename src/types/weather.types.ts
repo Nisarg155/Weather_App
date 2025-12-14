@@ -93,3 +93,10 @@ export type WeatherDataType = {
     hourly: HourlyArray,
     forecast:ForecastArray
 }
+
+export interface CityType {
+    id:number;
+    name: string;
+}
+
+export type CityArray = Array<CityType>;
