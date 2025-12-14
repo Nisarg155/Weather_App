@@ -1,3 +1,5 @@
+import {AstroType, HourlyArray} from "@/types/weather.types";
+
 export type ApiLocation = {
     name: string;
     region: string;
@@ -54,5 +56,23 @@ export interface ApiHour {
         icon: string;
     };
 }
+
+export interface ApiForecast {
+    date: string;
+    day:{
+        mintemp_c: number;
+        maxtemp_c: number;
+        mintemp_f: number;
+        maxtemp_f: number;
+        condition: {
+            text: string;
+            icon: string;
+        }
+    }
+    hour:ApiHourArray
+    astro:AstroType
+}
+
+export type ApiForecastArray = Array<ApiForecast>
 
 export type ApiHourArray = Array<ApiHour>;

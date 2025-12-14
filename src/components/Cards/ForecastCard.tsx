@@ -1,17 +1,12 @@
 "use client";
 
 import React from "react";
+import {ForecastArray} from "@/types/weather.types";
+import Image from "next/image";
+import {Scale} from "@/types/store.types";
 
-type ForecastDay = {
-    date: string;
-    day: {
-        maxtemp_c: number;
-        mintemp_c: number;
-        condition: { text: string; icon: string };
-    };
-};
 
-export function SevenDayForecast({ days }: { days: ForecastDay[] }) {
+export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; scale: Scale }) {
     return (
         <div className="mt-4">
             <div className="rounded-2xl bg-slate-800/60 p-4">
@@ -20,13 +15,13 @@ export function SevenDayForecast({ days }: { days: ForecastDay[] }) {
                 {/* horizontal scroll on small, grid on medium */}
                 <div className="overflow-x-auto">
                     <div className="inline-flex md:flex md:divide-x-0 w-full">
-                        {days.map((d, idx) => {
-                            const weekday = new Date(d.date).toLocaleDateString(undefined, {
+                        {forecast.map((day, idx) => {
+                            const weekday = new Date(day.date).toLocaleDateString(undefined, {
                                 weekday: "short",
                             });
-                            const icon = d.day.condition.icon.startsWith("//")
-                                ? `https:${d.day.condition.icon}`
-                                : d.day.condition.icon;
+                            const icon = day.day.condition.icon.startsWith("//")
+                                ? `https:${day.day.condition.icon}`
+                                : day.day.condition.icon;
 
                             return (
                                 <div
@@ -41,24 +36,24 @@ export function SevenDayForecast({ days }: { days: ForecastDay[] }) {
                                     <div className="text-xs text-slate-400 mb-2">{weekday}</div>
 
                                     {/* Icon */}
-                                    <img
+                                    <Image
                                         src={icon}
-                                        alt={d.day.condition.text}
+                                        alt={day.day.condition.text}
                                         className="h-10 w-10 my-1"
-                                        width={40}
-                                        height={40}
+                                        width={10}
+                                        height={10}
                                     />
 
                                     {/* Condition */}
                                     <div className="text-xs text-slate-400 mt-1">
-                                        {d.day.condition.text}
+                                        {day.day.condition.text}
                                     </div>
 
                                     {/* Temps */}
                                     <div className="text-lg font-semibold mt-2">
-                                        {Math.round(d.day.maxtemp_c)}°
+                                        {scale === 'C' ? Math.round(day.day.maxtemp_c) : Math.round(day.day.maxtemp_f)}°
                                         <span className="text-slate-400 text-sm">
-                      /{Math.round(d.day.mintemp_c)}°
+                      /{scale ? Math.round(day.day.mintemp_c) : Math.round(day.day.mintemp_f)}°
                     </span>
                                     </div>
                                 </div>

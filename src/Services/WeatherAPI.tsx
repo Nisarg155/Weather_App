@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
-import {CurrentDataType} from "@/types/weather.types";
-import {mapAstro, mapCurrentAndAtmospheric, mapHourly, mapLocation} from "@/utils/mapper.functions";
+import {WeatherDataType} from "@/types/weather.types";
+import {mapAstro, mapCurrentAndAtmospheric, mapForecast, mapHourly, mapLocation} from "@/utils/mapper.functions";
 
 
-export async function fetchCurrent(city: string): Promise<CurrentDataType | undefined> {
+export async function fetchCurrent(city: string): Promise<WeatherDataType | undefined> {
     try {
         const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY
-        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/forecast.json?key=${apiKey}&q=${city}&days=1`;
+        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/forecast.json?key=${apiKey}&q=${city}&days=8`;
 
         if (!apiKey) {
             throw new Error("No API key found.");
@@ -21,13 +21,17 @@ export async function fetchCurrent(city: string): Promise<CurrentDataType | unde
         const {location, current, forecast} = await response.json();
         const {Current, Atmospheric} = mapCurrentAndAtmospheric(current);
 
+        const next7daysforecast = forecast.forecastday.slice(1)
+        console.log(next7daysforecast)
+
 
         return {
             location: mapLocation(location),
             current: Current,
             atmospheric: Atmospheric,
             astro: mapAstro(forecast.forecastday[0].astro),
-            hourly: mapHourly(forecast.forecastday[0].hour)
+            hourly: mapHourly(forecast.forecastday[0].hour),
+            forecast:mapForecast(next7daysforecast)
         }
 
     } catch (e) {

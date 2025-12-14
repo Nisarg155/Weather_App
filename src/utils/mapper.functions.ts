@@ -4,9 +4,9 @@ import {
     CurrentAtmosphereType,
     HourlyArray,
     HourlyType,
-    LocationType
+    LocationType, ForecastArray, ForecastType
 } from "@/types/weather.types";
-import {ApiAstro, ApiCurrent, ApiHour, ApiHourArray, ApiLocation} from "@/types/api.types";
+import {ApiAstro, ApiCurrent, ApiForecastArray, ApiHour, ApiHourArray, ApiLocation} from "@/types/api.types";
 
 
 export function mapLocation(location: ApiLocation): LocationType {
@@ -97,3 +97,12 @@ export function mapHourly(hourly: ApiHourArray): HourlyArray {
         return [];
     });
 }
+
+export function mapForecast(forecast: ApiForecastArray): ForecastArray {
+    return forecast.map((item): ForecastType => ({
+        date: item.date,
+        day: item.day,
+        hourly: mapHourly(item.hour),
+    }));
+}
+

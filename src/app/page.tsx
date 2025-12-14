@@ -4,10 +4,10 @@ import {useEffect, useState} from "react";
 import {fetchCurrent} from "@/Services/WeatherAPI";
 import WeatherLayout from "@/components/WeatherLayout";
 import {WeatherCard} from "@/components/Cards/WeatherCard";
-import { ForecastDay} from "@/types/component.types";
-import {SevenDayForecast} from "@/components/Cards/WeatherForcast";
+import {ForecastDay} from "@/types/component.types";
+import {SevenDayForecast} from "@/components/Cards/ForecastCard";
 import {AirConditions} from "@/components/Cards/AirCondition";
-import {CurrentDataType} from "@/types/weather.types";
+import {WeatherDataType} from "@/types/weather.types";
 import WeatherCardLoader from "@/components/Loaders/WeatherCardLoader";
 import HourlyCarouselLoader from "@/components/Loaders/HourlyCarouselLoader";
 import {HourlyCarousel} from "@/components/Cards/HourlyCard";
@@ -16,6 +16,7 @@ import {AirConditionsLoader} from "@/components/Loaders/AirConditionsLoader";
 import {AstroCard} from "@/components/Cards/AstroCard";
 import {AstroCardLoader} from "@/components/Loaders/AstroLoader";
 import {RdxSwitch} from "@/components/ui/switch";
+import {SevenDayForecastLoader} from "@/components/Loaders/ForeCastLoaser";
 
 
 export default function Home() {
@@ -27,16 +28,16 @@ export default function Home() {
     const unit = useStore((s) => s.unit);
     const setUnit = useStore((s) => s.setUnit);
 
-    console.log(unit)
 
     // Card States
     const [weatherCardData, setWeatherCardData] = useState<
-        Pick<CurrentDataType, "location" | "current"> | null
+        Pick<WeatherDataType, "location" | "current"> | null
     >(null);
 
-    const [hourlyCarousalData, setHourlyCarousalData] = useState<Pick<CurrentDataType, "hourly"> | null>(null)
-    const [airConditionsData, setAirConditionsData] = useState<Pick<CurrentDataType,"atmospheric"> | null> (null)
-    const [astroData, setAstroData] = useState<Pick<CurrentDataType,"astro"> | null >(null)
+    const [hourlyCarousalData, setHourlyCarousalData] = useState<Pick<WeatherDataType, "hourly"> | null>(null)
+    const [airConditionsData, setAirConditionsData] = useState<Pick<WeatherDataType, "atmospheric"> | null>(null)
+    const [astroData, setAstroData] = useState<Pick<WeatherDataType, "astro"> | null>(null)
+    const [forecastData, setForecastData] = useState<Pick<WeatherDataType, "forecast"> | null>(null)
 
     // Loaders State
 
@@ -62,7 +63,11 @@ export default function Home() {
                 })
 
                 setAstroData({
-                    astro:data!.astro,
+                    astro: data!.astro,
+                })
+
+                setForecastData({
+                    forecast: data!.forecast,
                 })
                 setLoader(false)
 
@@ -73,17 +78,6 @@ export default function Home() {
         }
 
     }, [location]);
-
-
-
-    const mockForecast: ForecastDay[] = Array.from({length: 7}).map((_, i) => ({
-        date: new Date(Date.now() + i * 86400000).toISOString(),
-        day: {
-            maxtemp_c: 36 - i,
-            mintemp_c: 22 - i,
-            condition: {text: i % 2 ? "Sunny" : "Cloudy", icon: "//cdn.weatherapi.com/weather/64x64/day/113.png"}
-        },
-    }));
 
 
     return (
@@ -112,19 +106,20 @@ export default function Home() {
                             <HourlyCarouselLoader/>
                             <AirConditionsLoader/>
                             <AstroCardLoader/>
+                            <SevenDayForecastLoader/>
                         </>)
                         : (
                             <>
-                                <WeatherCard location={weatherCardData!.location} current={weatherCardData!.current} scale={scale}
+                                <WeatherCard location={weatherCardData!.location} current={weatherCardData!.current}
+                                             scale={scale}
                                 />
                                 <HourlyCarousel hourly={hourlyCarousalData!.hourly} scale={scale}/>
                                 <AirConditions aircondition={airConditionsData!.atmospheric} unit={unit}/>
                                 <AstroCard astro={astroData!.astro}/>
+                                <SevenDayForecast forecast={forecastData!.forecast} scale={scale}/>
                             </>
                         )
                 }
-
-                <SevenDayForecast days={mockForecast}/>
             </WeatherLayout>
         </>
     );

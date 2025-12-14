@@ -10,7 +10,6 @@ export function HourlyCarousel({hourly,scale}: { hourly: HourlyArray; scale:Scal
         return <HourlyCarouselLoader/>;
     }
 
-    console.log(hourly)
 
     return (
         <div className="mt-4 mb-4 overflow-x-auto scrollbar-hide">

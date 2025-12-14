@@ -68,10 +68,28 @@ export interface HourlyType {
 
 export type HourlyArray = Array<HourlyType>;
 
-export type CurrentDataType = {
+export interface ForecastType {
+    date: string;
+    day:{
+        maxtemp_c: number;
+        mintemp_c: number;
+        mintemp_f: number;
+        maxtemp_f: number;
+        condition:{
+            text: string;
+            icon: string;
+        }
+    }
+    hourly: HourlyArray;
+}
+
+export type ForecastArray = Array<ForecastType>;
+
+export type WeatherDataType = {
     location: LocationType;
     current: CurrentType,
     atmospheric: CurrentAtmosphereType,
     astro: AstroType,
-    hourly: HourlyArray
+    hourly: HourlyArray,
+    forecast:ForecastArray
 }
