@@ -15,12 +15,19 @@ import toast from "react-hot-toast";
 import {AirConditionsLoader} from "@/components/Loaders/AirConditionsLoader";
 import {AstroCard} from "@/components/Cards/AstroCard";
 import {AstroCardLoader} from "@/components/Loaders/AstroLoader";
+import {RdxSwitch} from "@/components/ui/switch";
 
 
 export default function Home() {
     const globalLocation = useStore((s) => s.currentLocation);
     const setCurrentLocation = useStore((s) => s.setCurrentLocation);
     const [location, setLocation] = useState(globalLocation);
+    const scale = useStore((s) => s.scale);
+    const setScale = useStore((s) => s.setScale);
+    const unit = useStore((s) => s.unit);
+    const setUnit = useStore((s) => s.setUnit);
+
+    console.log(unit)
 
     // Card States
     const [weatherCardData, setWeatherCardData] = useState<
@@ -67,14 +74,7 @@ export default function Home() {
 
     }, [location]);
 
-    const mockCurrent: Current = {
-        temp_c: 22.6,
-        feelslike_c: 23.2,
-        humidity: 27,
-        wind_kph: 9.7,
-        pressure_mb: 1015,
-        condition: {text: "Clear", icon: "//cdn.weatherapi.com/weather/64x64/night/113.png"},
-    };
+
 
     const mockForecast: ForecastDay[] = Array.from({length: 7}).map((_, i) => ({
         date: new Date(Date.now() + i * 86400000).toISOString(),
@@ -89,6 +89,23 @@ export default function Home() {
     return (
         <>
             <WeatherLayout>
+                <div className="flex justify-end gap-6 mb-4 pr-2">
+
+                    <RdxSwitch
+                        label="°F"
+                        checked={scale === "F"}
+                        onChange={(v) => {
+                            setScale(v ? "F" : "C");
+                        }}
+                    />
+
+                    <RdxSwitch
+                        label="Imperial"
+                        checked={unit === 'imperial'}
+                        onChange={(v) => setUnit(v ? "imperial" : "metric")}
+                    />
+
+                </div>
                 {
                     loader ? (<>
                             <WeatherCardLoader/>
@@ -98,10 +115,10 @@ export default function Home() {
                         </>)
                         : (
                             <>
-                                <WeatherCard location={weatherCardData!.location} current={weatherCardData!.current}
+                                <WeatherCard location={weatherCardData!.location} current={weatherCardData!.current} scale={scale}
                                 />
-                                <HourlyCarousel hourly={hourlyCarousalData!.hourly}/>
-                                <AirConditions aircondition={airConditionsData!.atmospheric}/>
+                                <HourlyCarousel hourly={hourlyCarousalData!.hourly} scale={scale}/>
+                                <AirConditions aircondition={airConditionsData!.atmospheric} unit={unit}/>
                                 <AstroCard astro={astroData!.astro}/>
                             </>
                         )

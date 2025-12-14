@@ -4,7 +4,7 @@ export type Coordinates = {
 } | null
 
 export type Unit = "metric" | "imperial"
-export type Scale = "Celsius" | "Fahrenheit"
+export type Scale = "C" | "F"
 
 export interface WeatherState {
     currentLocation: string;

@@ -1,9 +1,12 @@
 import {CurrentType,  LocationType} from "@/types/weather.types";
 import Image from "next/image";
+import {Scale} from "@/types/store.types";
 
 
 
-export function WeatherCard({ location, current }: { location: LocationType; current: CurrentType; }) {
+export function WeatherCard({ location, current,scale }: { location: LocationType; current: CurrentType; scale:Scale }) {
+
+
     return (
         <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-800/60 p-6 shadow-lg">
             <div className="flex items-center justify-between gap-6">
@@ -13,8 +16,12 @@ export function WeatherCard({ location, current }: { location: LocationType; cur
 
 
                     <div className="mt-4 flex items-end gap-6">
-                        <div className="text-6xl font-extrabold">{Math.round(current.temperature.celsius.actual)}°</div>
-                        <div className="text-sm text-slate-400">Feels like {Math.round(current.temperature.celsius.feelsLike ?? current.temperature.celsius.actual)}°</div>
+                        <div className="text-6xl font-extrabold">{  scale === 'C' ? Math.round(current.temperature.celsius.actual) :
+                            Math.round(current.temperature.fahrenheit.actual)
+                        }°</div>
+                        <div className="text-sm text-slate-400">Feels like {scale === 'C' ? (Math.round(current.temperature.celsius.feelsLike ?? current.temperature.celsius.actual) )
+                        : (Math.round(current.temperature.fahrenheit.feelsLike ?? current.temperature.fahrenheit.actual) )
+                        }°</div>
                     </div>
                 </div>
 

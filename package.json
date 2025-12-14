@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "lunarphase-js": "^2.0.3",
+    "@radix-ui/react-switch": "^1.2.6",
     "next": "16.0.8",
     "postcss": "^8.5.6",
     "radix-ui": "^1.4.3",

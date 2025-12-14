@@ -2,8 +2,9 @@
 import HourlyCarouselLoader from "../Loaders/HourlyCarouselLoader";
 import Image from "next/image";
 import {HourlyArray} from '@/types/weather.types'
+import {Scale} from "@/types/store.types";
 
-export function HourlyCarousel({hourly}: { hourly: HourlyArray }) {
+export function HourlyCarousel({hourly,scale}: { hourly: HourlyArray; scale:Scale }) {
     // show loader if no data
     if (!hourly || hourly.length === 0) {
         return <HourlyCarouselLoader/>;
@@ -23,7 +24,7 @@ export function HourlyCarousel({hourly}: { hourly: HourlyArray }) {
                         <Image src={item.icon?.startsWith("//") ? `https:${item.icon}` : item.icon} alt="icon"
                                width={100} height={100} className="mx-auto my-1 h-10 w-10"/>
                         <div className={'text-sm font-medium'}>{item.text}</div>
-                        <div className="text-sm font-medium">{Math.round(item.temp_c)}°</div>
+                        <div className="text-sm font-medium"> {scale === 'C' ?  Math.round(item.temp_c) : Math.round(item.temp_f)}°</div>
                     </div>
                 ))}
             </div>

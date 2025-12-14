@@ -9,7 +9,7 @@ export const useStore = create<WeatherState>()(
                 {
                     currentLocation: "vadodara",
                     unit: "metric",
-                    scale: "Celsius",
+                    scale: "C",
                     favourites: [],
                     coords: null,
 
