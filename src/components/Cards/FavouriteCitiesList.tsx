@@ -25,7 +25,7 @@ export function FavouriteCitiesList() {
                         key={city}
                         className="flex items-center justify-between py-3"
                     >
-                        {/* Clicking the city sets it as current */}
+
                         <button
                             onClick={() => setCurrentLocation(city)}
                             className="text-slate-200 font-medium hover:text-sky-400 transition"
@@ -33,7 +33,6 @@ export function FavouriteCitiesList() {
                             {city.charAt(0).toUpperCase() + city.slice(1)}
                         </button>
 
-                        {/* Remove button */}
                         <button
                             onClick={() => removeFavourite(city)}
                             className="text-red-400 hover:text-red-300 text-sm transition"
