@@ -15,7 +15,6 @@ const markerIcon = new L.Icon({
 
 export default function MapSelector() {
     const {coords, setCurrentLocation} = useStore();
-    console.log(coords);
 
     // Default coords (Vadodara)
     const defaultLat = coords!.lat;
@@ -82,7 +81,6 @@ export default function MapSelector() {
     async function handleReverseGeocode(lat: number, long: number) {
 
         const city = await fetchCityBasedOnLatLong({lat, long})
-        console.log(city)
         if (!city) return;
         setCurrentLocation(city!.name);
     }

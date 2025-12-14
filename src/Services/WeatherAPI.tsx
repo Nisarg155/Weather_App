@@ -73,7 +73,7 @@ export async function searchCity(city: string): Promise<CityArray | [] | undefin
 
 export async function fetchCityBasedOnLatLong(coords: Coordinates): Promise<CityType | undefined> {
     try {
-        console.log(coords)
+
         const url = `${process.env.NEXT_PUBLIC_BASE_URL}/search.json?key=${apiKey}&q=${coords!.lat},${coords!.long}`;
 
         if (!apiKey) {

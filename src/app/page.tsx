@@ -31,6 +31,10 @@ export default function Home() {
     const unit = useStore((s) => s.unit);
     const setUnit = useStore((s) => s.setUnit);
     const setCoords = useStore((s) => s.setCoords);
+    const favourites = useStore((s) => s.favourites);
+    const addFavourite = useStore((s) => s.addFavourite);
+    const removeFavourite = useStore((s) => s.removeFavourite);
+
 
     // Card States
     const [weatherCardData, setWeatherCardData] = useState<
@@ -122,6 +126,14 @@ export default function Home() {
                             <>
                                 <WeatherCard location={weatherCardData!.location} current={weatherCardData!.current}
                                              scale={scale}
+                                             isFavourite={favourites.includes(globalLocation)}
+                                             onToggleFavourite={() => {
+                                                 if (favourites.includes(globalLocation)) {
+                                                     removeFavourite(globalLocation)
+                                                 } else {
+                                                     addFavourite(globalLocation)
+                                                 }
+                                             }}
                                 />
                                 <HourlyCarousel hourly={hourlyCarousalData!.hourly} scale={scale}/>
                                 <AirConditions aircondition={airConditionsData!.atmospheric} unit={unit}/>
@@ -131,8 +143,6 @@ export default function Home() {
                             </>
                         )
                 }
-
-
 
 
             </WeatherLayout>
