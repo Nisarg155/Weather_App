@@ -18,6 +18,8 @@ import {RdxSwitch} from "@/components/ui/switch";
 import {SevenDayForecastLoader} from "@/components/Loaders/ForeCastLoaser";
 import dynamic from "next/dynamic";
 import {MapLoader} from "@/components/Loaders/MapLoader";
+import {FavouriteCitiesLoader} from "@/components/Loaders/FavouriteCitiesLoader";
+import {FavouriteCitiesList} from "@/components/Cards/FavouriteCitiesList";
 
 const MapSelector = dynamic(() => import("@/components/Map"), {
     ssr: false,
@@ -120,6 +122,7 @@ export default function Home() {
                             <AirConditionsLoader/>
                             <AstroCardLoader/>
                             <SevenDayForecastLoader/>
+                            <FavouriteCitiesLoader/>
                             <MapLoader/>
                         </>)
                         : (
@@ -139,6 +142,7 @@ export default function Home() {
                                 <AirConditions aircondition={airConditionsData!.atmospheric} unit={unit}/>
                                 <AstroCard astro={astroData!.astro}/>
                                 <SevenDayForecast forecast={forecastData!.forecast} scale={scale}/>
+                                <FavouriteCitiesList/>
                                 <MapSelector/>
                             </>
                         )
