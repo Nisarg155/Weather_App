@@ -63,7 +63,7 @@ export function CitySearch() {
                     className="
         absolute top-full left-0 mt-1 w-full
         rounded-lg bg-slate-800 shadow-xl border border-slate-700
-        z-50 max-h-60 overflow-y-auto
+        z-9999 max-h-60 overflow-y-auto
         empty:hidden
       "
                 >

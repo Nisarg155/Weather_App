@@ -30,7 +30,7 @@ export default function WeatherLayout({children}: LayoutProps) {
 
 function TopBar() {
     return (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full relative">
 
             <h1 className="text-xl font-semibold tracking-tight">Weather App</h1>
 

@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import {CityArray, WeatherDataType} from "@/types/weather.types";
+import {CityArray, CityType, WeatherDataType} from "@/types/weather.types";
 import {
     cityMapper,
     mapAstro,
@@ -8,6 +8,7 @@ import {
     mapHourly,
     mapLocation
 } from "@/utils/mapper.functions";
+import {Coordinates} from "@/types/store.types";
 
 const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY
 
@@ -64,6 +65,34 @@ export async function searchCity(city: string): Promise<CityArray | [] | undefin
         }
 
         return cityMapper(cities)
+
+    } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Error Finding the City");
+    }
+}
+
+export async function fetchCityBasedOnLatLong(coords: Coordinates): Promise<CityType | undefined> {
+    try {
+        console.log(coords)
+        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/search.json?key=${apiKey}&q=${coords!.lat},${coords!.long}`;
+
+        if (!apiKey) {
+            throw new Error("No API key found.");
+        }
+
+        const response = await fetch(url);
+
+
+        if (!response.ok) {
+            throw new Error("Error Finding the City ");
+        }
+
+        const data = await response.json();
+
+        return {
+            id: data[0].id,
+            name: data[0].name,
+        }
 
     } catch (e) {
         toast.error(e instanceof Error ? e.message : "Error Finding the City");

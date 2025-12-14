@@ -16,6 +16,12 @@ import {AstroCard} from "@/components/Cards/AstroCard";
 import {AstroCardLoader} from "@/components/Loaders/AstroLoader";
 import {RdxSwitch} from "@/components/ui/switch";
 import {SevenDayForecastLoader} from "@/components/Loaders/ForeCastLoaser";
+import dynamic from "next/dynamic";
+const MapSelector = dynamic(() => import("@/components/Map"), {
+    ssr: false,
+});
+
+
 
 
 export default function Home() {
@@ -26,7 +32,8 @@ export default function Home() {
     const setScale = useStore((s) => s.setScale);
     const unit = useStore((s) => s.unit);
     const setUnit = useStore((s) => s.setUnit);
-
+    const coords = useStore((s) => s.coords);
+    const setCoords = useStore((s) => s.setCoords);
 
     // Card States
     const [weatherCardData, setWeatherCardData] = useState<
@@ -48,10 +55,16 @@ export default function Home() {
             const load = async () => {
                 const data = await fetchCurrent(globalLocation)
 
+                setCoords({
+                    lat:data!.location.lat,
+                    long:data!.location.lon
+                })
+
                 setWeatherCardData({
                     location: data!.location,
                     current: data!.current
                 });
+
 
                 setHourlyCarousalData({
                     hourly: data!.hourly,
@@ -82,7 +95,7 @@ export default function Home() {
     return (
         <>
             <WeatherLayout>
-                <div className="flex justify-end gap-6 mb-4 pr-2">
+                <div className="flex justify-start gap-6 mb-4 pr-2 z-10">
 
                     <RdxSwitch
                         label="°F"
@@ -119,6 +132,7 @@ export default function Home() {
                             </>
                         )
                 }
+                <MapSelector/>
             </WeatherLayout>
         </>
     );
