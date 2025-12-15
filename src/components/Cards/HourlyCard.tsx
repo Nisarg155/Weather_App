@@ -23,7 +23,7 @@ export function HourlyCarousel({hourly,scale}: { hourly: HourlyArray; scale:Scal
                         <Image src={item.icon?.startsWith("//") ? `https:${item.icon}` : item.icon} alt="icon"
                                width={100} height={100} className="mx-auto my-1 h-10 w-10"/>
                         <div className={'text-sm font-medium'}>{item.text}</div>
-                        <div className="text-sm font-medium"> {scale === 'C' ?  Math.round(item.temp_c) : Math.round(item.temp_f)}°</div>
+                        <div className="text-sm font-medium"> {scale === 'C' ?  Math.round(item.temp_c) + '°C' : Math.round(item.temp_f) + '°F'}</div>
                     </div>
                 ))}
             </div>
