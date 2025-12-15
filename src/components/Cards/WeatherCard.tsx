@@ -42,14 +42,14 @@ export function WeatherCard({location, current, scale,isFavourite,onToggleFavour
 
                     <div className="mt-4 flex items-end gap-6">
                         <div
-                            className="text-6xl font-extrabold">{scale === 'C' ? Math.round(current.temperature.celsius.actual) :
-                            Math.round(current.temperature.fahrenheit.actual)
-                        }°
+                            className="text-6xl font-extrabold">{scale === 'C' ? Math.round(current.temperature.celsius.actual)  + '°C' :
+                            Math.round(current.temperature.fahrenheit.actual) + '°F'
+                        }
                         </div>
                         <div className="text-sm text-slate-400">Feels
-                            like {scale === 'C' ? (Math.round(current.temperature.celsius.feelsLike ?? current.temperature.celsius.actual))
-                                : (Math.round(current.temperature.fahrenheit.feelsLike ?? current.temperature.fahrenheit.actual))
-                            }°
+                            like {scale === 'C' ? (Math.round(current.temperature.celsius.feelsLike ?? current.temperature.celsius.actual)) + '°C'
+                                : (Math.round(current.temperature.fahrenheit.feelsLike ?? current.temperature.fahrenheit.actual)) + '°F'
+                            }
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ export function WeatherCard({location, current, scale,isFavourite,onToggleFavour
                     </div>
 
 
-                    <div className="mt-3 text-md font-medium ">{new Date().toLocaleTimeString()}</div>
+                    <div className="mt-3 text-md font-medium ">{new Date().toLocaleDateString()}</div>
                 </div>
             </div>
 

@@ -23,11 +23,12 @@ export function FavouriteCitiesList() {
                 {favourites.map((city) => (
                     <div
                         key={city}
+                        onClick={() => setCurrentLocation(city)}
                         className="flex items-center justify-between py-3"
                     >
 
                         <button
-                            onClick={() => setCurrentLocation(city)}
+
                             className="text-slate-200 font-medium hover:text-sky-400 transition"
                         >
                             {city.charAt(0).toUpperCase() + city.slice(1)}
