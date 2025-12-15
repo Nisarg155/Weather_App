@@ -57,7 +57,7 @@ export function WeatherCard({location, current, scale,isFavourite,onToggleFavour
 
                 <div className="flex flex-col items-center">
                     <div className="h-28 w-28 rounded-full  flex items-center justify-center shadow-inner">
-                        {/* icon (use absolute CDN path from API response) */}
+
                         <Image
                             src={current.condition.icon?.startsWith("//") ? `https:${current.condition.icon}` : current.condition.icon}
                             alt={current.condition.text}

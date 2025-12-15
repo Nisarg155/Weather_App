@@ -23,10 +23,7 @@ export default function WeatherCardLoader() {
                         {/* Big temperature skeleton */}
                         <div className="h-20 w-28 rounded-md bg-slate-700/60 animate-pulse" />
 
-                        {/* Feels like skeleton */}
-                        {/*<div className="text-sm text-slate-400">*/}
-                        {/*    <div className="h-4 w-36 rounded bg-slate-700/50 animate-pulse" />*/}
-                        {/*</div>*/}
+
                     </div>
                 </div>
 
@@ -34,7 +31,7 @@ export default function WeatherCardLoader() {
                 <div className="flex flex-col items-center">
                     {/* Icon circle */}
                     <div className="h-28 w-28 rounded-full  flex items-center justify-center shadow-inner">
-                        {/* circular shimmer (simulates icon) */}
+
                         <div className="h-16 w-16 rounded-full bg-white/20 animate-pulse" />
                     </div>
 

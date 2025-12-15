@@ -49,7 +49,7 @@ export function AstroCard({astro}:{astro:AstroType}) {
 
             </div>
 
-            {/* RIGHT — 3 columns: Moonrise / Phase / Moonset */}
+
             <div className="rounded-xl col-span-2 sm:col-span-1 bg-slate-800/60 p-3 grid grid-cols-3 text-center">
 
                 {/* Moonrise */}

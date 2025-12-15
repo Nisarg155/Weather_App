@@ -12,7 +12,7 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
             <div className="rounded-2xl bg-slate-800/60 p-4">
                 <h3 className="text-sm text-slate-300 mb-4">7-DAY FORECAST</h3>
 
-                {/* horizontal scroll on small, grid on medium */}
+
                 <div className="overflow-x-auto">
                     <div className="inline-flex md:flex md:divide-x-0 w-full">
                         {forecast.map((day, idx) => {
@@ -30,10 +30,9 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
                     px-6 py-6 flex flex-col items-center justify-center text-center
                   `}
                                 >
-                                    {/* Day */}
+
                                     <div className="text-xs text-slate-400 mb-2">{day.date}</div>
 
-                                    {/* Icon */}
                                     <Image
                                         src={icon}
                                         alt={day.day.condition.text}
@@ -42,12 +41,10 @@ export function SevenDayForecast({forecast, scale}: { forecast: ForecastArray; s
                                         height={10}
                                     />
 
-                                    {/* Condition */}
                                     <div className="text-xs text-slate-400 mt-1">
                                         {day.day.condition.text}
                                     </div>
 
-                                    {/* Temps */}
                                     <div className="text-lg font-semibold mt-2">
                                         {scale === 'C' ? Math.round(day.day.maxtemp_c) : Math.round(day.day.maxtemp_f)}°
                                         <span className="text-slate-400 text-sm">

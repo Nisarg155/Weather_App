@@ -5,7 +5,7 @@ import {HourlyArray} from '@/types/weather.types'
 import {Scale} from "@/types/store.types";
 
 export function HourlyCarousel({hourly,scale}: { hourly: HourlyArray; scale:Scale }) {
-    // show loader if no data
+
     if (!hourly || hourly.length === 0) {
         return <HourlyCarouselLoader/>;
     }
