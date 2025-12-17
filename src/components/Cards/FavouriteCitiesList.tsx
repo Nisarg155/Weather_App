@@ -1,6 +1,6 @@
 "use client";
 
-import { useStore } from "@/lib/useStore";
+import {useStore} from "@/lib/useStore";
 
 export function FavouriteCitiesList() {
     const favourites = useStore((s) => s.favourites);
@@ -35,7 +35,10 @@ export function FavouriteCitiesList() {
                         </button>
 
                         <button
-                            onClick={() => removeFavourite(city)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                removeFavourite(city)
+                            }}
                             className="text-red-400 hover:text-red-300 text-sm transition"
                         >
                             Remove
